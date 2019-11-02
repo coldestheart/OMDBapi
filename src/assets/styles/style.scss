@@ -1,0 +1,86 @@
+@import 'fonts';
+@import 'variables';
+
+// MAIN STYLES
+body {
+    font-family: $font-title;
+    color: $text-dark;
+    background: $gray-dark;
+    font-size: $font-medium;
+    font-weight: 300;
+    margin: 0;
+}
+
+h2 {
+    background: $primary-dark;
+    color: $text-light;
+    padding: $padding-default;
+    width: 220px;
+}
+
+.container {
+    padding: $padding-container;
+}
+
+// TRANSISIONS
+.fade-enter-active,
+.fade-leave-active {
+    position: absolute;
+    transform: translateX(0px);
+    transition: opacity .2s ease-out, transform .3s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+    position: absolute;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+
+// HEADER STYLES
+.header {
+    background: $primary;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.header-container {
+    display: flex;
+}
+
+.logo {
+    animation: color-change 3s infinite;
+}
+
+.menu {
+    margin-left: auto;
+}
+
+.menu>a {
+    color: $text-light;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: $font-small;
+    vertical-align: middle;
+}
+
+// SIMPLE ANIMATIONS
+@keyframes color-change {
+    0% {
+        color: #fafafa;
+    }
+
+    33% {
+        color: #e35183
+    }
+
+    66% {
+        color: #78002e;
+    }
+
+    100% {
+        color: #fafafa;
+    }
+}
