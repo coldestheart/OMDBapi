@@ -1,10 +1,52 @@
-# OMDBapi
-TestWork OMDBAPI
+# OMDB movies SPA
+<br>
+Small project to access OMDB database.
+Get Movies from OMDB api.
 
+### Features:
 
-To run : npm i && npm run dev
+* Favorites
+* Sort
 
+### Setup:
+<br>
+```
+npm i
+```
+<br>
+- - -
 
-To Build: npm i && npm run prod
+> Also you can configure request in **/src/store/modules/movies.js**
 
-No pages loader avaliable (to get movies db need wait)
+- - -
+
+#### How to run:
+
+```
+npm run dev
+```
+
+#### How to build:
+<br>
+```
+npm run prod
+```
+<br>
+- - -
+
+Technologies:
+
+> \-\- ES6
+> \-\- VUE\(X\)
+> \-\- AXIOS
+> \-\- SASS
+> \-\- WEBPACK 4
+
+- - -
+
+**Developed by COLD 11.2019**
+
+- - -
+
+<br>
+<br>
