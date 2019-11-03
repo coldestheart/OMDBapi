@@ -7,6 +7,5 @@
         <router-link to="/favorite">Favorite</router-link>
       </div>
     </div>
-
   </div>
 </template>

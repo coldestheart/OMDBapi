@@ -28,12 +28,12 @@
             <p>Year: {{ movie.Year }}</p>
             <button
               v-if="!movie.inFav"
-              @click="addToFavorites(movie.imdbID)"
+              @click="toFavorites(movie.imdbID)"
               class="btn draw-border"
             >+</button>
             <button
               v-if="movie.inFav"
-              @click="removeFromFavorites(movie.imdbID)"
+              @click="fromFavorites(movie.imdbID)"
               class="btn draw-border"
             >-</button>
           </div>
@@ -51,9 +51,6 @@ import { mapState, mapMutations } from "vuex"
 export default {
   components: {
     Error
-  },
-  data() {
-    return {}
   },
   props: {
     pagetype: String
@@ -74,8 +71,16 @@ export default {
     ...mapMutations({
       addToFavorites: 'addToFavorites',
       removeFromFavorites: 'removeFromFavorites',
-      Order: 'Order'
-    })
+      changeOrder: 'changeOrder'
+    }),
+    toFavorites (id) {
+      this.addToFavorites(id)
+      this.$toasted.show('Movie has been added to Favorites')
+    },
+    fromFavorites (id) {
+      this.removeFromFavorites(id)
+      this.$toasted.show('Movie has been removed from Favorites')
+    }
   }
 }
 </script>
