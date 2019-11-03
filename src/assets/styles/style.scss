@@ -23,20 +23,19 @@ h2 {
 }
 
 // TRANSISIONS
-.fade-enter-active,
-.fade-leave-active {
-    position: absolute;
+.slide-enter-active,
+.slide-leave-active {
     transform: translateX(0px);
     transition: opacity .2s ease-out, transform .3s ease-out;
 }
-
-.fade-enter,
-.fade-leave-to {
-    position: absolute;
+.slide-enter,
+.slide-leave-to {
     opacity: 0;
     transform: translateX(-50px);
 }
-
+.slide-leave-active, .slide-leave-to {
+    position: absolute;
+}
 
 // HEADER STYLES
 .header {
@@ -65,7 +64,10 @@ h2 {
     font-size: $font-small;
     vertical-align: middle;
 }
-
+//Toasted
+.toasted {
+    background-color: $secondary !important;
+}
 // SIMPLE ANIMATIONS
 @keyframes color-change {
     0% {

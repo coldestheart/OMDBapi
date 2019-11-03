@@ -2,22 +2,28 @@
   <div>
     <Header />
     <div class="container">
-    <transition name="fade">
-    <RouterView />
-    </transition>
+      <transition name="slide">
+        <RouterView />
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
-import './assets/styles/style.scss'
-import Header from './components/widgets/Header'
+import "@/assets/styles/style.scss"
+import Header from "@/components/layout/Header"
+import { mapActions } from 'vuex'
 export default {
-    components: {
+  components: {
     Header
   },
-  created() {
-        this.$store.dispatch("GET_MOVIES")
+  methods: {
+    ...mapActions({
+      getMovies: 'getMovies'
+    })
   },
+  created () {
+    this.getMovies()
+  }
 }
 </script>

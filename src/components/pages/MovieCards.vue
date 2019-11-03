@@ -2,20 +2,20 @@
   <div>
     <Error
       :pagetype="this.pagetype"
-      v-if="Filter(MOVIES).length < 1"
+      v-if="moviesList.length === 0"
     />
-    <div v-if="Filter(MOVIES).length > 0">
+    <div v-if="moviesList.length > 0">
       <button
         @click="Order()"
         class="sort btn"
       >
-        <span v-if="reversed">Reverse Order</span>
-        <span v-if="!reversed">Normalize Order</span>
+        <span v-if="MOVIES.order">Reverse Order</span>
+        <span v-if="!MOVIES.order">Normalize Order</span>
       </button>
       <div class="card-grid">
         <div
           class="card"
-          v-for="movie in Filter(MOVIES)"
+          v-for="movie in moviesList"
           :key="movie.imdbID"
         >
           <img
@@ -28,12 +28,12 @@
             <p>Year: {{ movie.Year }}</p>
             <button
               v-if="!movie.inFav"
-              @click="addToFavorites(movie)"
+              @click="addToFavorites(movie.imdbID)"
               class="btn draw-border"
             >+</button>
             <button
               v-if="movie.inFav"
-              @click="removeFromFavorites(movie)"
+              @click="removeFromFavorites(movie.imdbID)"
               class="btn draw-border"
             >-</button>
           </div>
@@ -44,59 +44,38 @@
 </template>
 
 <script>
-import "../../assets/styles/button.scss"
-import "../../assets/styles/cards.scss"
-import Error from "./Error"
-import { mapGetters } from "vuex"
+import "@/assets/styles/button.scss"
+import "@/assets/styles/cards.scss"
+import Error from "@/components/pages/Error"
+import { mapState, mapMutations } from "vuex"
 export default {
   components: {
     Error
   },
   data() {
-    return {
-      reversed: false
-    }
+    return {}
   },
   props: {
     pagetype: String
   },
-  created() {
-    this.reversed = this.$store.state.movies.order
-  },
   computed: {
-    ...mapGetters({
-      MOVIES: "MOVIES"
-    })
+    ...mapState({
+      MOVIES: 'movies'
+    }),
+    moviesList () {
+      if (this.pagetype === 'favorites') {
+        return this.MOVIES.list.filter(m => m.inFav === true)
+      } else {
+        return this.MOVIES.list
+      }
+    }
   },
   methods: {
-    Order: function() {
-      this.$store.commit("REVERSE_ORDER")
-      this.reversed = this.$store.state.movies.order
-    },
-    Filter: function(movies) {
-      let favorites = movies.filter(m =>
-        this.$store.state.movies.favorites.includes(m.imdbID)
-      )
-      if (this.pagetype === "home") {
-        if (!this.$store.state.movies.order) {
-          return movies.slice().reverse()
-        } else {
-          return movies
-        }
-      } else {
-        if (!this.$store.state.movies.order) {
-          return favorites.slice().reverse()
-        } else {
-          return favorites
-        }
-      }
-    },
-    addToFavorites(movie) {
-      this.$store.commit("ADD_TO_FAVORITES", movie.imdbID)
-    },
-    removeFromFavorites(movie) {
-      this.$store.commit("REMOVE_FROM_FAVORITES", movie.imdbID)
-    }
+    ...mapMutations({
+      addToFavorites: 'addToFavorites',
+      removeFromFavorites: 'removeFromFavorites',
+      Order: 'Order'
+    })
   }
 }
 </script>

@@ -1,12 +1,7 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Home from '@/pages/Home'
+import Favorite from '@/pages/Favorite'
 
-import Home from 'pages/Home'
-import Favorite from 'pages/Favorite'
-
-Vue.use(Router)
-
-const routes = [
+export default [
   {
     path: '*',
     component: Home
@@ -16,7 +11,3 @@ const routes = [
     component: Favorite
   }
 ]
-
-export default new Router({
-  routes
-})

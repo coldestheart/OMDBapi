@@ -1,15 +1,11 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
-import movies from './modules/movies'
+import Vue from 'vue'
+import movies from '@/store/modules/movies'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
   modules: {
     movies
   },

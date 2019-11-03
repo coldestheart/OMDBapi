@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import Axios from 'axios'
 
 const API_BASE_DATA = 'http://www.omdbapi.com'
@@ -6,37 +7,33 @@ const API_REQUEST_DATA = '?s=love&type=movie&apikey=6a673701&page='
 const state = {
   list: [],
   favorites: [],
-  order: true,
-  pagecounter: 1
-}
-
-const getters = {
-  MOVIES: state => {
-    return state.list
-  }
+  order: true
 }
 
 const mutations = {
-  SET_MOVIES: (state, payload) => {
+  setMovies (state, payload) {
     payload.forEach(m => (state.favorites.includes(m.imdbID)) ? m.inFav = true : m.inFav = false)
     state.list = payload
   },
-  REVERSE_ORDER: (state) => {
+  Order (state) {
     state.order = !state.order
+    state.list = state.list.slice().reverse()
   },
-  ADD_TO_FAVORITES: (state, payload) => {
+  addToFavorites (state, payload) {
     state.list[state.list.findIndex(m => m.imdbID === payload)].inFav = true
     state.favorites.push(payload)
+    Vue.toasted.show('Movie has been added to Favorites')
   },
-  REMOVE_FROM_FAVORITES: (state, payload) => {
+  removeFromFavorites (state, payload) {
     const index = state.favorites.findIndex(m => m === payload)
     state.favorites.splice(index, 1)
     state.list[state.list.findIndex(m => m.imdbID === payload)].inFav = false
+    Vue.toasted.show('Movie has been removed from Favorites')
   }
 }
 
 const actions = {
-  GET_MOVIES: async (context) => {
+ async getMovies ({commit}) {
     try {
       let mlist = []
       let i = 1
@@ -46,16 +43,15 @@ const actions = {
         mlist = mlist.concat(list.data.Search)
         i++
       }
-      context.commit('SET_MOVIES', mlist)
+      commit('setMovies', mlist)
     } catch (e) {
-      console.error(e)
+      Vue.toasted.show('e')
     }
   }
 }
 
 export default {
   state,
-  getters,
   mutations,
-  actions,
+  actions
 }

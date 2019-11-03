@@ -4,8 +4,9 @@
     <MovieCards :pagetype="pagetype" />
   </div>
 </template>
+
 <script>
-import MovieCards from "../components/pages/MovieCards"
+import MovieCards from "@/components/pages/MovieCards"
 export default {
   name: "Favorites",
   components: {
