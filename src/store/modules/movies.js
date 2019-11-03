@@ -16,6 +16,7 @@ const mutations = {
   },
   changeOrder (state) {
     state.order = !state.order
+    state.list = state.list.slice().reverse()
   },
   addToFavorites (state, payload) {
     state.list[state.list.findIndex(m => m.imdbID === payload)].inFav = true

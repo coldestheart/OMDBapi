@@ -6,7 +6,7 @@
     />
     <div v-if="moviesList.length > 0">
       <button
-        @click="Order()"
+        @click="changeOrder()"
         class="sort btn"
       >
         <span v-if="MOVIES.order">Reverse Order</span>
