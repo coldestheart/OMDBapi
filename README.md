@@ -9,11 +9,15 @@ Get Movies from OMDB api.
 * Sort
 
 ### Setup:
+
 <br>
+
 ```
 npm i
 ```
+
 <br>
+
 - - -
 
 > Also you can configure request in **/src/store/modules/movies.js**
@@ -27,11 +31,15 @@ npm run dev
 ```
 
 #### How to build:
+
 <br>
+
 ```
 npm run prod
 ```
+
 <br>
+
 - - -
 
 Technologies:
